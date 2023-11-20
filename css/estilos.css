@@ -1,0 +1,782 @@
+/**------------VARIABLES--------------------------------  */
+:root{
+    --verde:#00A1A9;
+    --blanco:#fff;
+    --rojo:#881014;
+    --oscuro:#000;
+    --titulos:'Arima Madurai', cursive;
+    --parrafos:'Mulish', sans-serif;
+}
+/**----------FIN - VARIABLES----------------------------- */
+
+/** Respetar los valores: box-sizing: border-box y box-sizing: inherit  */
+/** sin sumar los valores por ejm de los padding */
+
+
+html{
+
+    box-sizing: border-box;
+    /* resetear el tama#o de la letra por defecto del navegador */
+    /* de 16px ahora mide 10px, ya que 1rem por defecto son 16px
+    por lo tanto ahora 1rem = 10 px  */
+    font-size: 62.5%;
+}
+
+body{
+    /* 1.6rem = 36px */
+    font-size: 1.6rem;
+    /* ocultar la barra de desplazamiento en el eje X  */
+    overflow-x: hidden;
+
+}
+
+*,*::after, *::before{
+    box-sizing: inherit;
+}
+
+/**----------------GLOBALES--------------------------------  */
+.contenedor{
+    max-width: 120rem;
+    /* centrar */
+    margin: 0 auto;
+    width: 95%;
+}
+h1,h2{
+    font-family: var(--titulos);
+}
+h3,p,a{
+    font-family: var(--parrafos);
+}
+
+/* para que las imagenes tomen el 100% del tama;o de su contenedor PADRE */
+img{
+    max-width: 100%;
+}
+
+
+.verde{
+    color:var(--verde)
+}
+.rojo{
+    color:var(--rojo)
+}
+/* display:none para ocultar un elemento */
+.ocultar{
+    display: none;
+}
+.btn-cerrar{
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--blanco);
+    position: absolute;
+    top: 0;
+    right: 5rem;
+    /* desactivar el modo seleccionar al clickear la X */
+    user-select: none;
+}
+.pantalla-completa{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* agregamos transparecia */
+    background-color: rgba(0,0,0, 0.5);
+
+    /* orden se sobreposicion (orden en que un elemento se muestra sobre otro )*/
+    z-index: 4;
+}
+
+@keyframes desplazamiento {
+    0%{
+        /* -100% para que este escondido */
+        transform: translateX(100%);
+    }
+
+    100%{
+        transform: translateX(0) ;
+    }
+}
+
+
+/* colocar el cursor de tipo manito al pasarlo por la X */
+.btn-cerrar:hover{
+    cursor:pointer;
+}
+
+.btn{
+    text-decoration: none;
+    color: var(--blanco);
+    font-size:  2rem;
+    /* capitalize: la primera letra de cada palabra sea mayusculas */
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+
+/* desde tablet hacia adelante */
+@media(min-width:768px){
+    .btn{
+        font-size: 2.2rem;
+    }
+}
+
+.bordes{
+    border: 3px solid var(--blanco);
+}
+
+/* desde tablet hacia adelante */
+@media(min-width:768px){
+    .bordes{
+        border: 4px solid var(--blanco); 
+    }
+}
+
+.bordes:hover{
+  color: var(--verde);
+  background-color: var(--blanco);
+}
+
+
+.btn-rojo{
+    background-color: var(--rojo);
+    font-weight: bold;
+    /* 
+    Modificamos los margenes, PERO el elemento debe ser en bloque 
+    para utilizar estas funciones por ello colocamos display: inline-block;
+    para que siga siento un elemento en linea pero con la funciones como fuera en bloque
+    */
+    display: inline-block;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.btn-verde{
+   background-color: var(--verde);
+   border: none; 
+   display: inline-block;
+   margin-bottom: 2rem;
+   font-family: var(--parrafos);
+}
+
+.btn-verde:hover{
+    background-color: var(--rojo);
+    cursor: pointer;
+}
+
+
+/**----------FIN GLOBALES------------------------------------ */
+
+
+/**--------- INDIVIDUAL --------- */
+
+/* PARTE - ENCABEZADO Encabezado */
+.contenedor-navegacion{
+    background-color:var(--oscuro);
+    /** Para activar los z-index se debe usar position:relative; */
+    position:relative;
+    z-index: 5;
+}
+.contenido-navegacion{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo h2, .navegacion a{
+    color: var(--blanco);
+}
+.logo h2{
+    font-size: 3rem;
+}
+.navegacion a{
+    text-decoration: none;
+    font-size: 2.2rem;
+    padding: 1.5rem;
+    padding-left: 4rem;
+    display: block;
+    /* ease-in-out para dar un efecto de suavizado al inicio y al final */
+    transition: color .3s ease-in-out;
+    text-align: center;
+}
+
+/* desde 768px hacia adelante (modo escritorio) */
+@media(min-width: 768px){
+    .navegacion a{
+        text-align: left;
+    }
+}
+
+/** Hover con elementos hijos los cuales seran hermanos de sus elementos pares (even) */
+.navegacion a:nth-child(even):hover{
+       color: var(--rojo);
+}
+
+/** Hover con elementos hijos que seran hermanos de sus elementos impares (odd) */
+.navegacion a:nth-child(odd):hover{
+    color: var(--verde);
+}
+
+/** seleccionar primer hijo de tipo a */
+.navegacion a:first-of-type{
+     margin-top: 5rem;
+}
+
+ /** position: absolute; desprende el elemento del padre */
+ /** alinear con top, right, left, bottom */
+.navegacion {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Pantalla completa height: 100vh;  o tambien se puede colocar bottom: 0*/
+    /* bottom: 0; */
+    height: 100vh;
+    width: 40rem;
+    padding:  3rem 4rem;
+    background-color: var(--oscuro);
+    animation:  desplazamiento .5s ease-in-out;
+}
+
+.hamburguesa:hover{
+    cursor:pointer;
+}
+
+/** Para poder ponerle ancho y largo a un elemento debe ser 
+/** de tipo bloque(block) */
+.hamburguesa span{
+    background-color: var(--blanco);
+    display: block;
+    width: 5rem;
+    height: .5rem;
+    margin-bottom: .5rem;
+}
+
+/* PARTE - VIDEO DEL HEADER */
+
+/* position: relative (PADRE) */
+.contenido-header{
+    position:relative;
+}
+
+/* *Sombreado en todo el header */
+/* position: absolute (HIJO): tomara la posicion del padre */
+/* ::before se mostrara antes del elemento .contenido-header */
+.contenido-header::before{
+    content: '';
+    position:absolute;
+    /* todos los lados a 0 para que ocupe todo el espacio disponible */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba(0, 0, 0, .5);
+}
+
+
+/* position: absolute para que tome la posicion del padre,
+se posiciona arriba de todos los elementos que estan en el header */
+.texto-encabezado{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 80%;
+
+    /* se posicionan al lado del otro */
+    /* Flexbox siempre se coloca al elemento padre */
+    display: flex;
+
+    /* posicionar los elementos uno arriba del otro */
+    /* cambiando la posicion del elemento */
+    flex-direction: column;  
+
+/**---------------------------------------------------------*/
+    /*! NOTA: 
+    /*? Si se intercambia la posicion de row a column:
+    /* align-items: para alinear horizontalmente */
+    /* justify-content: alinear verticalmente */
+    /*? Si se intercambia la posicion de column a row:
+    /* align-items: para alinear verticalmente */
+    /* justify-content: alinear Horizontalmente */
+/**---------------------------------------------------------*/
+
+    align-items: center; 
+    justify-content: center;
+
+}
+
+.texto-encabezado h2{
+    color: var(--blanco);
+    font-size: 4rem;
+}
+
+/* Desde tablet hacia arriba */
+@media(min-width:768px){
+    .texto-encabezado{
+        font-size:8rem ;
+    }
+}
+
+video{
+    width: 100%;
+    height: 100%;
+}
+
+/* PARTE -SOBRE NOSOTROS */
+
+.contenedor-nosotros{
+    padding-top: 5rem;
+}
+
+/* solo se coloque las imagenes una al de la otra y con espacio
+cuando este en modo tablet hacia adelante */
+/* Es decir que modo movil se quede normal (los elementos se coloquen hacia abajo)
+como viene por defecto */
+@media(min-width: 768px){
+    .contenedor-nosotros{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+/** ------------------------------------------------------------------------------------
+flex : flex-grow, flex-shrink, flex-basis
+
+flex-grow: Si hay espacio sobrante (disponible ) hace que contenido sea mas grande
+flex-shrink: Hace mas peque#o el contenido
+flex-basis: define una base, como el width que define un ancho
+
+Activamos las condiciones con 1 y desactivamos con 0
+
+/**------------------------------------------------------------------------------------*/
+.texto-nosotros, .imagenes-nosotros{
+   /* Calculamos el 50% del elemento (cada elemento le asignamos el 50%) */
+   /* restamos 1rem para que haya espacio (1rem = 10px) entre los elementos */
+   flex: 0 0 calc(50% - 1rem)
+}
+
+.texto-nosotros .bienvenida{
+    font-size: 4rem;
+    color: var(--verde);
+    text-align: center;
+}
+
+@media(min-width: 768px){
+    .texto-nosotros .bienvenida{
+        text-align: left;
+    }
+}
+
+.texto-nosotros h1{
+    font-size: 5rem;
+    text-align: center;
+}
+
+@media(min-width: 768px){
+    .texto-nosotros h1{
+        text-align: left;
+    }
+}
+
+.texto-nosotros p{
+    font-size: 2rem;
+    text-align: center;
+}
+
+@media(min-width: 768px){
+    .texto-nosotros p{
+        text-align: left;
+    }
+}
+
+
+.imagenes-nosotros{
+    /* flex para colocar las imagenes una lado de la otra */
+    display: flex;
+    justify-content: space-between;    
+}
+
+.imagenes-nosotros img{
+    border-radius: 5px ;
+}
+
+.imagen1, .imagenes2{
+   flex: 0 0 calc(50% - 1rem); 
+}
+
+.imagenes2 img{
+    margin-bottom: 1rem;
+}
+
+.menu{
+    padding-top: 4rem;
+}
+
+/* * PARTE PLATILLOS */
+
+.texto-platillos{
+    text-align: center;
+    font-size: 5rem;
+}
+
+.botones-platillos{
+    display: flex;
+    /*  flex-wrap: wrap; Los elementos flexibles se envuelven en
+     múltiples líneas si no hay suficiente espacio en la línea actual.*/
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.botones-platillos button{
+    flex: 0 0 calc(50% - 1rem);
+    /* para que los botones midan igual */
+    padding: 1rem 3rem;
+}
+
+@media(min-width:768px){
+    .botones-platillos{
+        display: inline-block;
+    }
+
+    .botones-platillos button{
+        /* resetear sus valores previamente establecidos */ 
+         flex: unset; 
+    }
+}
+
+@media(min-width:768px){
+    .platillos{
+        display: flex;
+        justify-content: space-between;
+        /* al hacer flex-wrap: wrap; debemos definir las medida de los hijos */
+        /* con  flex: 0 0 calc(medida% - 1rem);*/
+        flex-wrap: wrap;
+    
+    }
+}
+
+
+.platillo{
+    /* definimos una base (medidas que tendran los elementos) */
+    flex: 0 0 calc(33.3% - 1rem);
+    border: 1px solid #e1e1e1;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.platillo h2{
+    text-align: center;
+}
+
+.platillo p{
+    font-size: 1.8rem;
+}
+
+.precio{
+    display: flex;
+    justify-content: space-between;
+}
+
+.precio p{
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.precio button{
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--rojo);
+    color: var(--blanco);
+    height: 3.8rem;
+}
+
+/** PARTE SEPARADOR */
+
+.separador{
+    background-image: url(../assets/ensalada.webp);
+    /* cover para que se adapte a su contenedor padre */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    /* para que el .separador::before con position: absolute; pueda funcionar  */
+    /* es decir si el hijo (seudoelemento) es absolute el padre debe ser relative */
+    position: relative;
+
+    /* sobreponemos para que el contenido quede arriba del background */
+    z-index: 2;
+}
+
+/* .separador::before sera el seudoelemento de separador   */
+/* separador: seria el padre y  .separador::before seria el hijo*/
+/* con position:absolute se nos activa top, right, left y el bottom */
+.separador::before{
+    content: '';
+    position: absolute;
+
+    /* todo en cero para el background (colocado mas abajo) ocupe todos los lados */
+    top: 0 ;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    /* este seria el background que colocaremos */
+    background-color: rgba(0, 0, 0, .5);
+
+    /* sobreponemos para que el background quede abajo del contenido */
+    z-index: -1;
+}
+
+.contenido-separador{
+    padding: 5rem ;
+}
+
+.contenido-separador h2{
+    font-size: 4rem;
+    color: var(--blanco);
+    text-align: center;
+
+}
+
+
+/* tablet hacia arriba */
+@media(min-width:768px){
+    .contenido-separador h2{
+        text-align: left;
+        font-size: 5rem;
+        color: var(--blanco);
+    }   
+}
+
+
+.contenido-separador p{
+    font-size: 3rem;
+    color: var(--blanco);
+    text-align: center;
+}
+
+/* tablet hacia arriba */
+@media(min-width:768px){
+    .contenido-separador p{
+        text-align: left;
+    }
+}
+
+/** FIN PARTE SEPARADOR */
+
+
+
+/** PARTE DEL CHEF */
+
+.chef h2{
+    background-color: var(--rojo);
+    /* para que sea tipo linea pero con caracteristicas en block */
+    display: inline-block;
+    padding: 1rem 3rem;
+    color: var(--blanco);
+    font-size: 4rem;
+}
+
+@media(min-width:768px){
+    .contenido-chef{
+        /* los elemetos se coloquen uno al lado del otro */
+        display: flex;
+        /* justificado con estilo space-between */
+        justify-content: space-between;
+    }
+}
+
+/* cada elemento ocupe 50% del contenedor menos 1rem */
+.texto-chef, .imagen-chef{
+  flex: 0 0 calc(50% - 1rem);
+}
+
+.texto-chef h3{
+    font-size: 3rem;
+}
+
+.texto-chef p{
+    font-size: 2rem;
+}
+
+/** FIN PARTE DEL CHEF */
+
+/**--------- PARTE FORMULARIO CONTACTO------------ */
+
+/** PARTE IZQUIERDA DEL FORMULARIO */
+.formulario-contacto{
+    padding-top: 5rem;
+}
+
+
+@media(min-width:768px){
+    .formulario-contacto{
+      display:flex;
+    }
+}   
+
+
+.informacion-contacto, .formulario{
+    flex: 0 0 calc(50% - 1rem);
+}
+
+.informacion-contacto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--oscuro);
+    padding: 2rem;
+}
+
+
+.informacion-contacto h3, .informacion-contacto p, .redes-sociales i{
+    color: var(--blanco);
+}
+
+.informacion-contacto h3{
+    font-size: 4rem;
+    font-family: var(--titulos);
+}
+
+.informacion-contacto p{
+    font-size: 2.2rem;
+}
+
+.informacion-contacto i{
+    margin-right:1rem ;
+}
+
+.redes-sociales{
+    font-size: 3rem;
+
+}
+
+/** FIN PARTE IZQUIERDA DEL FORMULARIO */
+/* ---------------------------------------- */
+
+
+/** PARTE DERECHA DEL FORMULARIO */
+
+.formulario{
+    padding: 5rem;
+}
+
+.input-formulario label{
+    /* colocamos los input debajo de los label */
+    display: block;
+    font-size: 2rem;
+    font-family: var(--parrafos);
+    margin-bottom: 1.5rem;
+}
+
+/* los input y textarea ocupen el 100% del espacio disponible */
+.input-formulario input, .input-formulario textarea{
+    width: 100%;
+}
+
+.input-formulario input, .input-formulario textarea{
+    padding: 1rem 1.6rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    /* quitamos el borde que viene por defecto */
+    outline: none;
+    font-family: var(--parrafos);
+}
+
+.input-formulario textarea{
+    height: 20rem;
+    /* el tamano del textarea no sea cambiado por el usuario */
+    resize: none;
+
+}
+
+/** FIN PARTE DERECHA DEL FORMULARIO */
+
+
+/**-------- FIN PARTE FORMULARIO CONTACTo-------- */
+
+
+
+
+/** PARTE PIE DE PAGINA */
+
+.pie-pagina{
+    margin-top: 5rem;
+    background-color: rgb(20, 20, 20);
+    padding: 5rem;
+}
+
+@media(min-width:768px){
+    .contenedor-piepagina{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.info{
+    /* como son 4 cada uno ocupa el 25% */
+    flex: 0 0 calc(25% - 1rem);
+    margin-bottom: 2rem;
+}
+
+.info h3, .info p{
+    color: var(--blanco);
+    text-align: center;
+}
+
+.info h3{
+    font-size: 2.2rem;
+}
+
+.info p{
+    font-size: 1.8rem;
+}
+
+.redes-pie{
+    text-align: center;
+}
+
+/* seleccionamos por tipo para no generar conflictos */
+.info input[type="email"]{
+    font-family: var(--parrafos);
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    /* quitamos el borde que viene por defecto */
+    outline: none;
+    /* que ocupe el 100% del espacio que hay disponible */
+    width: 100%;
+}
+
+.info input[type="submit"]{
+    padding: .5rem 2rem;
+    font-size: 1.8rem;
+    border-radius: 0;
+}
+
+
+/** FIN PARTE PIE DE PAGINA */
+
+/** PARTE FOOTER */
+
+.footer{
+    text-align: center;
+    background-color: var(--oscuro);
+    color: var(--blanco);
+    padding: 2rem;
+    font-size: 2rem;
+}
+
+/** FIN PARTE FOOTER */
+
+
+
+/**------------ FIN INDIVIDUAL--------- */
+
+
+
